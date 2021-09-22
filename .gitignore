@@ -1,0 +1,10 @@
+gen
+gen
+naive_code
+naive_code
+optimised_code
+optimised_code
+*.exe
+*.out
+.vscode
+.cph
