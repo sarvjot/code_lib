@@ -6,5 +6,6 @@ optimised_code
 optimised_code
 *.exe
 *.out
+*.txt
 .vscode
 .cph
