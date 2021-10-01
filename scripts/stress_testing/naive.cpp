@@ -15,95 +15,117 @@ using namespace std;
 const big MOD = 1e9 + 7;
 const big INF = INT64_MAX;
 
-big add(big a, big b)
+vector<big> seg_tree;
+
+big combine(big a, big b)
 {
-    return (a % MOD + b % MOD) % MOD;
+    return min(a, b);
 }
 
-big mult(big a, big b)
+void build(vector<big> &arr, big node, big tl, big tr)
 {
-    return ((long long)a % MOD * b % MOD) % MOD;
-}
-
-big sub(big a, big b)
-{
-    return ((a % MOD - b % MOD) % MOD + MOD) % MOD;
-}
-
-big solve()
-{
-    big n, res = 0;
-    string s;
-
-    cin >> n >> s;
-
-    char prev = '0', first = '0';
-    big prev_i = -1, first_i = -1, cur_len = 0, len = 0, sum = INF, cnt = 0;
-
-    for (big i = 0; i < n; i++)
+    if (tl == tr)
     {
-        if (s[i] == '.')
+        seg_tree[node] = arr[tl];
+    }
+    else
+    {
+        big tm = (tr - tl) / 2 + tl;
+
+        build(arr, 2 * node, tl, tm);
+        build(arr, 2 * node + 1, tm + 1, tr);
+
+        seg_tree[node] = combine(seg_tree[2 * node],
+                                 seg_tree[2 * node + 1]);
+    }
+}
+
+void update(big node, big tl, big tr, big pos, big new_val)
+{
+    if (tl == tr)
+    {
+        seg_tree[node] = new_val;
+    }
+    else
+    {
+        big tm = (tr - tl) / 2 + tl;
+
+        if (pos <= tm)
         {
-            len = mult(len, 2ll);
+            update(2 * node, tl, tm, pos, new_val);
         }
         else
         {
-            len = add(len, 1ll);
+            update(2 * node + 1, tm + 1, tr, pos, new_val);
         }
+
+        seg_tree[node] = combine(seg_tree[2 * node],
+                                 seg_tree[2 * node + 1]);
     }
+}
+
+big query(big node, big tl, big tr, big l, big r)
+{
+    if (l > r)
+    {
+        return INF;
+    }
+
+    if (l == tl && r == tr)
+    {
+        return seg_tree[node];
+    }
+
+    big tm = (tr - tl) / 2 + tl;
+
+    big q1 = query(2 * node, tl, tm, l, min(r, tm));
+    big q2 =
+        query(2 * node + 1, tm + 1, tr, max(l, tm + 1), r);
+
+    return combine(q1, q2);
+}
+
+void solve()
+{
+    big n;
+    cin >> n;
+
+    seg_tree = vector<big>(4 * n);
+    vector<big> arr(n);
 
     for (big i = 0; i < n; i++)
     {
-        if (s[i] == '.')
-        {
-            if (sum != INF)
-            {
-                res = mult(res, 2ll);
-                res = add(res, mult(cur_len, sub(mult(cnt, sub(len, cur_len)), add(sum, cnt))));
-                sum = mult(2ll, add(sum, mult(cur_len, cnt)));
-                cnt = mult(cnt, 2ll);
-            }
-
-            if (prev != '0' && first != '0' && prev != first)
-            {
-                res = add(res, mult(add(prev_i, 1ll), sub(len, add(cur_len, first_i))));
-                sum = add(add(sum, prev_i), add(cur_len, first_i));
-                cnt = add(cnt, 1ll);
-            }
-
-            prev_i = add(prev_i, cur_len);
-            cur_len = mult(cur_len, 2ll);
-        }
-        else
-        {
-            if (s[i] != 'F')
-            {
-                if (first == '0')
-                {
-                    first = s[i];
-                    first_i = cur_len;
-                }
-                if (prev != '0' && prev != s[i])
-                {
-                    res = add(res, mult(add(prev_i, 1ll), sub(len, cur_len)));
-                    if (sum == INF)
-                    {
-                        sum = add(prev_i, cur_len);
-                    }
-                    else
-                    {
-                        sum = add(sum, add(prev_i, cur_len));
-                    }
-                    cnt = add(cnt, 1ll);
-                }
-                prev = s[i];
-                prev_i = cur_len;
-            }
-            cur_len = add(cur_len, 1ll);
-        }
+        cin >> arr[i];
     }
 
-    return res;
+    build(arr, 1, 0, n - 1);
+
+    big q, l, r, mid, ans;
+    for (big i = 0; i < n; i++)
+    {
+        l = i + 1;
+        r = n - 1;
+        ans = -1;
+
+        while (l <= r)
+        {
+            mid = (r - l) / 2 + l;
+            q = query(1, 0, n - 1, l, mid);
+
+            if (q < arr[i])
+            {
+                ans = arr[mid];
+                r = mid - 1;
+            }
+            else
+            {
+                l = mid + 1;
+            }
+        }
+
+        cout << ans << " ";
+    }
+    cout << nl;
 }
 
 int main()
@@ -111,10 +133,10 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int test = 1;
-    cin >> test;
-    for (int i = 1; i <= test; i++)
+    // cin >> test;
+    while (test-- > 0)
     {
-        cout << "Case #" << i << ": " << solve() << nl;
+        solve();
     }
     return 0;
 }
