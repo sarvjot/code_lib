@@ -15,128 +15,34 @@ using namespace std;
 const big MOD = 1e9 + 7;
 const big INF = INT64_MAX;
 
-vector<big> seg_tree;
-
-big combine(big a, big b)
-{
-    return min(a, b);
-}
-
-void build(vector<big> &arr, big node, big tl, big tr)
-{
-    if (tl == tr)
-    {
-        seg_tree[node] = arr[tl];
-    }
-    else
-    {
-        big tm = (tr - tl) / 2 + tl;
-
-        build(arr, 2 * node, tl, tm);
-        build(arr, 2 * node + 1, tm + 1, tr);
-
-        seg_tree[node] = combine(seg_tree[2 * node],
-                                 seg_tree[2 * node + 1]);
-    }
-}
-
-void update(big node, big tl, big tr, big pos, big new_val)
-{
-    if (tl == tr)
-    {
-        seg_tree[node] = new_val;
-    }
-    else
-    {
-        big tm = (tr - tl) / 2 + tl;
-
-        if (pos <= tm)
-        {
-            update(2 * node, tl, tm, pos, new_val);
-        }
-        else
-        {
-            update(2 * node + 1, tm + 1, tr, pos, new_val);
-        }
-
-        seg_tree[node] = combine(seg_tree[2 * node],
-                                 seg_tree[2 * node + 1]);
-    }
-}
-
-big query(big node, big tl, big tr, big l, big r)
-{
-    if (l > r)
-    {
-        return INF;
-    }
-
-    if (l == tl && r == tr)
-    {
-        return seg_tree[node];
-    }
-
-    big tm = (tr - tl) / 2 + tl;
-
-    big q1 = query(2 * node, tl, tm, l, min(r, tm));
-    big q2 =
-        query(2 * node + 1, tm + 1, tr, max(l, tm + 1), r);
-
-    return combine(q1, q2);
-}
-
-void solve()
-{
-    big n;
-    cin >> n;
-
-    seg_tree = vector<big>(4 * n);
-    vector<big> arr(n);
-
-    for (big i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
-
-    build(arr, 1, 0, n - 1);
-
-    big q, l, r, mid, ans;
-    for (big i = 0; i < n; i++)
-    {
-        l = i + 1;
-        r = n - 1;
-        ans = -1;
-
-        while (l <= r)
-        {
-            mid = (r - l) / 2 + l;
-            q = query(1, 0, n - 1, l, mid);
-
-            if (q < arr[i])
-            {
-                ans = arr[mid];
-                r = mid - 1;
-            }
-            else
-            {
-                l = mid + 1;
-            }
-        }
-
-        cout << ans << " ";
-    }
-    cout << nl;
-}
-
-int main()
-{
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int test = 1;
-    // cin >> test;
-    while (test-- > 0)
-    {
-        solve();
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
     }
-    return 0;
+    int ans[n];
+    sort(a, a + n);
+    int j = 0;
+    for (int i = 1; i < n; i += 2) {
+        ans[i] = a[j];
+        j++;
+    }
+    for (int i = 0; i < n; i += 2) {
+        ans[i] = a[j];
+        j++;
+    }
+    int cnt = 0;
+    for (int i = 1; i < n - 1; i++) {
+        if (ans[i] < ans[i - 1] && ans[i] < ans[i + 1]) {
+            cnt++;
+        }
+    }
+    cout << cnt << "\n";
+    for (int i = 0; i < n; i++) {
+        cout << ans[i] << " ";
+    }
 }
