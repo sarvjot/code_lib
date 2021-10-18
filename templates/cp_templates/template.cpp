@@ -19,14 +19,7 @@ const big INF = INT64_MAX;
 
 void solve()
 {
-    big n;
-    cin >> n;
 
-    vector<big> v(n);
-    for (big i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
 }
 
 int main()
