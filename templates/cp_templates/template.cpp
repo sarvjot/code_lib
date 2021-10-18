@@ -3,10 +3,12 @@ using namespace std;
 
 #define nl "\n"
 #define big long long
+#define precision(x) fixed << setprecision(x)
+#define get_set_bits(x) __builtin_popcountll(x) 
 
 #ifndef ONLINE_JUDGE
-#define ds(statement) cerr << "\033[31m" << statement << endl
-#define dv(var) cerr << "\033[31m" << (#var) << ": " << var << endl
+#define ds(statement) cerr << "\033[31m" << statement << "\033[37m" << endl
+#define dv(var) cerr << "\033[31m" << (#var) << ": " << var << "\033[37m" << endl
 #else
 #define ds(statement)
 #define dv(var)
@@ -17,7 +19,7 @@ const big INF = INT64_MAX;
 
 void solve()
 {
-    big n, res = 0;
+    big n;
     cin >> n;
 
     vector<big> v(n);
@@ -25,8 +27,6 @@ void solve()
     {
         cin >> v[i];
     }
-
-    cout << res << nl;
 }
 
 int main()
