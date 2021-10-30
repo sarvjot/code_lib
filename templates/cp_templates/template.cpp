@@ -5,7 +5,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-template <typename T,typename S,typename Q>ostream &operator<<(ostream &os,tuple<T,S,Q> &t){os<<"("<<get<0>(t)<<", "<<get<1>(t)<<", "<<get<2>(t)<<")";return os;}
+template<typename T,typename S,typename Q>ostream &operator<<(ostream &os,tuple<T,S,Q> &t){os<<"("<<get<0>(t)<<", "<<get<1>(t)<<", "<<get<2>(t)<<")";return os;}
 template<typename T,typename S>ostream &operator<<(ostream &os,pair<T,S>&p){os<<"("<<p.first<<", "<<p.second<<")";return os;}
 template<typename T,typename S>ostream &operator<<(ostream &os,map<T,S>&v){os<<"[ ";for(auto it=v.begin();it!=v.end();it++){os<<"("<<(*it).first<<", "<<(*it).second <<") ";}os <<"]";return os;}
 template<typename T>ostream &operator<<(ostream &os,vector<T>&v){os<<"[ ";for(auto element:v){os<<element<<" ";}os<<"]";return os;}
