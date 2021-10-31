@@ -5,12 +5,13 @@
 using namespace std;
 using namespace __gnu_pbds;
 
+template<typename T>char delim_fun(T t){string s=typeid(t).name();set<string>st={"set", "vector","map"};for(auto a:st){if(s.find(a)!=std::string::npos)return'\n';}return' ';}
 template<typename T,typename S,typename Q>ostream &operator<<(ostream &os,tuple<T,S,Q> &t){os<<"("<<get<0>(t)<<", "<<get<1>(t)<<", "<<get<2>(t)<<")";return os;}
 template<typename T,typename S>ostream &operator<<(ostream &os,pair<T,S>&p){os<<"("<<p.first<<", "<<p.second<<")";return os;}
 template<typename T,typename S>ostream &operator<<(ostream &os,map<T,S>&v){os<<"[ ";for(auto it=v.begin();it!=v.end();it++){os<<"("<<(*it).first<<", "<<(*it).second <<") ";}os <<"]";return os;}
-template<typename T>ostream &operator<<(ostream &os,vector<T>&v){os<<"[ ";for(auto element:v){os<<element<<" ";}os<<"]";return os;}
-template<typename T>ostream &operator<<(ostream &os,set<T> &v){os<<"[ ";for(auto it=v.begin();it!=v.end();it++){os<<*it<<" ";}os<<"]";return os;}
-template<typename T>ostream &operator<<(ostream &os,multiset<T> &v){os<<"[ ";for(auto it=v.begin();it!=v.end();it++){os<<*it<<" ";}os<<"]";return os;}
+template<typename T>ostream &operator<<(ostream &os,vector<T>&v){char ch=delim_fun(v[0]);if(ch==' ')os<<"[ ";for(auto element:v){os<<element;os<<ch;}if(ch==' ')os<<"]";return os;}
+template<typename T>ostream &operator<<(ostream &os,set<T> &v){char ch=delim_fun(*(v.begin()));if(ch==' ')os<<"[ ";for(auto element:v){os<<element;os<<ch;}if(ch==' ')os<<"]";return os;}
+template<typename T>ostream &operator<<(ostream &os,multiset<T> &v){char ch=delim_fun(*(v.begin()));if(ch==' ')os<<"[ ";for(auto element:v){os<<element;os<<ch;}if(ch==' ')os<<"]";return os;}
 template<typename...Args>void logger(string vars,Args&&...values){cerr<<"\033[31m"<<vars<<" : ";string delim;(...,(cerr<<delim<<values,delim=", "));cerr<<"\033[37m"<<endl;}
 
 #define nl "\n"
@@ -41,7 +42,14 @@ const big INF = INT64_MAX;
 
 void solve()
 {
+    big n;
+    cin >> n;
+    vector<big> v(n);
 
+    for(big i = 0; i < n; i++)
+    {
+        cin >> v[i];
+    }
 }
 
 int main()
