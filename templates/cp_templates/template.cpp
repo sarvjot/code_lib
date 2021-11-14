@@ -60,7 +60,7 @@ int main()
     cin >> test;
     for (int i = 1; i <= test; i++)
     {
-        cout << "Case #" << i << ": ";
+        //cout << "Case #" << i << ": ";
         solve();
     }
     return 0;
