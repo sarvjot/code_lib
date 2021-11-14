@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rm a.out
+[ -f a.out ] && rm a.out 
 [ -d io ] || mkdir io
 for file in "in1" "out1" "ans1" "in2" "out2" "ans2" "in0" "out0" "ans0"
 do
