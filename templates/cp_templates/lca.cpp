@@ -1,3 +1,32 @@
+ 
+void dfs(big node, big par, vector<vector<big>> &g, vector<big> &d){
+    for(auto nebr : g[node]){
+        if(nebr != par){
+            d[nebr] = d[node] + 1;
+            dfs(nebr, node, g, d);
+        }
+    }
+}
+
+void bin_lift(big n, big lim, vector<vector<big>> &up, vector<big> &par){
+    for(big i = 0; i < n; i++)
+    {
+        up[i][0] = par[i];    
+    }
+
+    for(big j = 1; j < lim; j++)
+    {
+        for(big i = 0; i < n; i++)
+        {
+            if(up[i][j - 1] == -1){
+                up[i][j] = -1;
+            }else{
+                up[i][j] = up[up[i][j - 1]][j - 1];
+            }
+        }
+    }
+}
+
 big lca(big a, big b, big lim, vector<big> &depth, vector<vector<big>> &up){
     // bringing a and b at same level
 
