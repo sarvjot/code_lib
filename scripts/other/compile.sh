@@ -1,1 +1,1 @@
-g++ -std=gnu++17 -O3 -g -fsanitize=signed-integer-overflow -fsanitize=bounds-strict -fsanitize=address -fsanitize=integer-divide-by-zero -fsanitize=float-divide-by-zero -fsanitize=pointer-overflow -fsanitize=shift-exponent -fsplit-stack -Wshadow -Wall -fconcepts -DONLINE_JUDGE -o $1 $1.cpp
+g++ -std=c++17 -O3 $1 -o xyz

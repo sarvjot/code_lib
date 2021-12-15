@@ -16,6 +16,7 @@ template<typename...Args>void logger(string vars,Args&&...values){cerr<<"\033[31
 
 #define nl "\n"
 #define big long long
+#define all(x) (x).begin(), (x).end()
 #define precision(x) fixed << setprecision(x)
 #define get_set_bits(x) __builtin_popcountll(x) 
 #define ordered tree<big, null_type, less<big>, rb_tree_tag, tree_order_statistics_node_update>
