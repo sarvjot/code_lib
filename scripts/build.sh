@@ -1,0 +1,1 @@
+g++ -std=c++17 -DSARVJOT -ggdb3 -fmax-errors=2 -fsanitize=signed-integer-overflow -fsanitize=bounds-strict -fsanitize=address -fsanitize=integer-divide-by-zero -fsanitize=float-divide-by-zero -fsanitize=pointer-overflow -fsanitize=shift-exponent -fsplit-stack -Wshadow -Wall -fconcepts $1 -o $2 
