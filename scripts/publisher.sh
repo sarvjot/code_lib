@@ -1,7 +1,7 @@
 bld="g++ -std=gnu++17 -O3 -DDEBUG -g -fsanitize=signed-integer-overflow -fsanitize=bounds-strict -fsanitize=address -fsanitize=integer-divide-by-zero -fsanitize=float-divide-by-zero -fsanitize=pointer-overflow -fsanitize=shift-exponent -fsplit-stack -Wshadow -Wall -fconcepts"
 
 $bld code.cpp -o c.out
-$bld gen.cpp -o g.out
+$bld generator.cpp -o g.out
 
 if [ ! -d input ]; then
     mkdir input
