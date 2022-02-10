@@ -41,26 +41,22 @@ void print_pbdsms(ordered_ms &v){;}
 const big MOD = 1e9 + 7;
 const big INF = INT64_MAX;
 
-void solve()
-{
+void solve(){
     big n;
     cin >> n;
     vector<big> v(n);
 
-    for(big i = 0; i < n; i++)
-    {
+    for(big i = 0; i < n; i++){
         cin >> v[i];
     }
 }
 
-int main()
-{
+int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int test = 1;
     cin >> test;
-    for (int i = 1; i <= test; i++)
-    {
+    for (int i = 1; i <= test; i++){
         //cout << "Case #" << i << ": ";
         solve();
     }
