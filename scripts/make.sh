@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-template="/home/sarvjot/programming/cp/code_lib/templates/cp_templates/template.cpp"
+template="$lib_path/templates/cp_templates/template.cpp"
 
 for var in "$@"
 do

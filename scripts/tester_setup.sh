@@ -4,5 +4,5 @@ if [ -d tester ]; then
     rm -rf tester 
 fi
 
-cp -r ~/programming/cp/code_lib/templates/cp_templates/tester_templates ./tester
-cp -r ~/programming/cp/code_lib/scripts/tester.sh ./tester/tester.sh
+cp -r $lib_path/templates/cp_templates/tester_templates ./tester
+cp -r $lib_path/scripts/tester.sh ./tester/tester.sh
