@@ -5,13 +5,13 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-template<typename T>char delim_fun(T t){string s=typeid(t).name();set<string>st={"set", "vector","map"};for(auto a:st){if(s.find(a)!=std::string::npos)return'\n';}return' ';}
-template<typename T,typename S,typename Q>ostream &operator<<(ostream &os,tuple<T,S,Q> &t){os<<"("<<get<0>(t)<<", "<<get<1>(t)<<", "<<get<2>(t)<<")";return os;}
+template<typename T>char delim_fun(T t){string s=typeid(t).name();set<string> st={"set","vector","map"};for(auto a:st){if(s.find(a)!=std::string::npos)return'\n';}return' ';}
 template<typename T,typename S>ostream &operator<<(ostream &os,pair<T,S>&p){os<<"("<<p.first<<", "<<p.second<<")";return os;}
-template<typename T,typename S>ostream &operator<<(ostream &os,map<T,S>&v){os<<"[ ";for(auto it=v.begin();it!=v.end();it++){os<<"("<<(*it).first<<", "<<(*it).second <<") ";}os <<"]";return os;}
-template<typename T>ostream &operator<<(ostream &os,vector<T>&v){char ch=delim_fun(v[0]);if(ch==' ')os<<"[ ";for(auto element:v){os<<element;os<<ch;}if(ch==' ')os<<"]";return os;}
-template<typename T>ostream &operator<<(ostream &os,set<T> &v){char ch=delim_fun(*(v.begin()));if(ch==' ')os<<"[ ";for(auto element:v){os<<element;os<<ch;}if(ch==' ')os<<"]";return os;}
-template<typename T>ostream &operator<<(ostream &os,multiset<T> &v){char ch=delim_fun(*(v.begin()));if(ch==' ')os<<"[ ";for(auto element:v){os<<element;os<<ch;}if(ch==' ')os<<"]";return os;}
+template<typename T,typename S,typename Q>ostream &operator<<(ostream &os,tuple<T,S,Q>&t){os<<"("<<get<0>(t)<<", "<<get<1>(t)<<", "<<get<2>(t)<<")"; return os;}
+template<typename T>ostream &operator<<(ostream &os,vector<T>&v){char delim=delim_fun(v[0]);os<<"[";for(auto element:v){os<<delim<<element;}os<<delim<<"]";return os;}
+template<typename T>ostream &operator<<(ostream &os,set<T>&v){char delim=delim_fun(*(v.begin()));os<<"{";for(auto element:v){os<<delim<<element;}os<<delim<<"}";return os;}
+template<typename T>ostream &operator<<(ostream &os,multiset<T>&v){char delim=delim_fun(*(v.begin()));os<<"{";for(auto element:v){os<<delim<<element;}os<<delim<<"}";return os;}
+template<typename T,typename S>ostream &operator<<(ostream &os,map<T,S>&v){os<<"{";for(auto it=v.begin();it!=v.end();it++){os<<"\n{"<<(*it).first<<", "<<(*it).second<<"},";}os<<"\n}";return os;}
 template<typename...Args>void logger(string vars,Args&&...values){cerr<<vars<<" : ";string delim;(...,(cerr<<delim<<values,delim=", "));cerr<<endl;}
 
 #define nl "\n"
