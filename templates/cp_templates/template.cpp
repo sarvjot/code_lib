@@ -25,8 +25,8 @@ template<typename...Args>void logger(string vars,Args&&...values){cerr<<"\033[31
 #ifdef SARVJOT 
 #define ds(statement) cerr << "\033[32m" << statement << "\033[37m" << endl
 #define dv(args...) logger(#args, args)
-#define sm_line  cerr << "\033[33m" << "---------X--------" << "\033[37m" << endl
-#define lg_line  cerr << "\033[34m" << "------X----------X------" << "\033[37m" << endl
+#define sm_line	 cerr << "\033[33m" << "---------X--------" << "\033[37m" << endl
+#define lg_line	 cerr << "\033[34m" << "------X----------X------" << "\033[37m" << endl
 void print_pbds(ordered &v){cerr<<"\033[31m"<<"[ ";for(auto a:v){cerr<<a<<" ";}cerr<<"]"<<"\033[37m"<<endl;}
 void print_pbdsms(ordered_ms &v){cerr<<"\033[31m"<<"[ ";for(auto a:v){cerr<<a<<" ";}cerr<<"]"<<"\033[37m"<<endl;}
 #else
@@ -42,23 +42,23 @@ const big MOD = 1e9 + 7;
 const big INF = INT64_MAX;
 
 void solve(){
-    big n;
-    cin >> n;
-    vector<big> v(n);
+	big n;
+	cin >> n;
+	vector<big> v(n);
 
-    for(big i = 0; i < n; i++){
-        cin >> v[i];
-    }
+	for(big i = 0; i < n; i++){
+		cin >> v[i];
+	}
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int test = 1;
-    cin >> test;
-    for (int i = 1; i <= test; i++){
-        //cout << "Case #" << i << ": ";
-        solve();
-    }
-    return 0;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int test = 1;
+	cin >> test;
+	for (int i = 1; i <= test; i++){
+		//cout << "Case #" << i << ": ";
+		solve();
+	}
+	return 0;
 }

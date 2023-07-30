@@ -17,44 +17,44 @@ const big inf = INT64_MAX;
 
 void solve()
 {
-    big n;
-    cin >> n;
-    vector<big> v(n);
-    vector<big> dp;
+	big n;
+	cin >> n;
+	vector<big> v(n);
+	vector<big> dp;
 
-    for (big i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
+	for (big i = 0; i < n; i++)
+	{
+		cin >> v[i];
+	}
 
-    for (big i = 0; i < n; i++)
-    {
-        big cur = v[i];
+	for (big i = 0; i < n; i++)
+	{
+		big cur = v[i];
 
-        auto it = lower_bound(dp.begin(), dp.end(), cur);
+		auto it = lower_bound(dp.begin(), dp.end(), cur);
 
-        if (it == dp.end())
-        {
-            dp.push_back(cur);
-        }
-        else
-        {
-            *it = cur;
-        }
-    }
+		if (it == dp.end())
+		{
+			dp.push_back(cur);
+		}
+		else
+		{
+			*it = cur;
+		}
+	}
 
-    cout << dp.size() << nl;
+	cout << dp.size() << nl;
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int test = 1;
-    // cin >> test;
-    while (test-- > 0)
-    {
-        solve();
-    }
-    return 0;
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int test = 1;
+	// cin >> test;
+	while (test-- > 0)
+	{
+		solve();
+	}
+	return 0;
 }
