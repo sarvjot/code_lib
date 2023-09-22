@@ -1,3 +1,5 @@
+// prefix: trie
+// description: trie data structure
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,31 +14,26 @@ using namespace std;
 #define dv(var)
 #endif
 
-const big mod = 1e9 + 7;
-const big inf = INT64_MAX;
+const big MOD = 1e9 + 7;
+const big INF = INT64_MAX;
 
-struct trie
-{
+struct trie{
 	vector<trie *> children;
 
-	trie()
-	{
+	trie(){
 		children = vector<trie *>(26, NULL);
 	}
 };
 
 trie *root;
 
-void insert(string &str)
-{
+void insert(string &str){
 	trie *cur = root;
 
-	for (char ch : str)
-	{
+	for (char ch : str){
 		big ind = ch - 'a';
 
-		if (cur->children[ind] == NULL)
-		{
+		if (cur->children[ind] == NULL){
 			cur->children[ind] = new trie;
 		}
 
@@ -44,38 +41,29 @@ void insert(string &str)
 	}
 }
 
-void generate_trie(string &str)
-{
+void generate_trie(string &str){
 	big n = str.size();
-	for (big i = 0; i < n; i++)
-	{
+	for (big i = 0; i < n; ++i){
 		string t = str.substr(i);
 		insert(t);
 	}
 }
 
-big dfs_trie(string &s, trie *cur, big k)
-{
+big dfs_trie(string &s, trie *cur, big k){
 	big ans = 0;
 
-	if (cur != root)
-	{
+	if (cur != root){
 		ans = 1;
 	}
 
-	for (big i = 0; i < 26; i++)
-	{
-		if (cur->children[i] != NULL)
-		{
-			if (s[i] == '0')
-			{
-				if (k > 0)
-				{
+	for (big i = 0; i < 26; ++i){
+		if (cur->children[i] != NULL){
+			if (s[i] == '0'){
+				if (k > 0){
 					ans += dfs_trie(s, cur->children[i], k - 1);
 				}
 			}
-			else
-			{
+			else{
 				ans += dfs_trie(s, cur->children[i], k);
 			}
 		}
@@ -84,8 +72,7 @@ big dfs_trie(string &s, trie *cur, big k)
 	return ans;
 }
 
-void solve()
-{
+void solve(){
 	root = new trie();
 
 	string s1, s2;
@@ -98,14 +85,12 @@ void solve()
 	cout << ans << nl;
 }
 
-int main()
-{
+int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 	int test = 1;
 	// cin >> test;
-	while (test-- > 0)
-	{
+	while (test-- > 0){
 		solve();
 	}
 	return 0;

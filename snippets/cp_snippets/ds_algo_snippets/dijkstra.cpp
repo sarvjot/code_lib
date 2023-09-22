@@ -1,6 +1,7 @@
-void dijkstra(big src, big n, vector<big>& dist, vector<big>& par, vector<vector<pair<big, big>>>& adj)
-{
-	dist.assign(n, inf);
+// prefix: dijkstra
+// description: dijkstra's algorithm for single source shortest path [O(n*log(n) + m*log(n)) = O(m*log(n))]
+void dijkstra(big src, big n, vector<big>& dist, vector<big>& par, vector<vector<pair<big, big>>>& g){
+	dist.assign(n, INF);
 	par.assign(n, -1);
 	dist[src] = 0;
 
@@ -18,7 +19,7 @@ void dijkstra(big src, big n, vector<big>& dist, vector<big>& par, vector<vector
 			continue;
 		}
 
-		for (auto nebr : adj[v]) {
+		for (auto nebr : g[v]) {
 			big to = nebr.first;
 			big wt = nebr.second;
 
